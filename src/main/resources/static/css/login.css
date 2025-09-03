@@ -1,0 +1,253 @@
+:root{
+    --primary:#497BF0;
+    --primary-light:#E1EEF5;
+    --secondary:#1D1D1D;
+    --background:#bdafeecb;
+    --text:#1F2346
+}
+body{
+    font-size: 1em;
+    font-family: Mulish,
+        sans-serif;
+    background-color: #f5f5f5;
+}
+.error {
+    color: red;
+}
+.login-wrapper{
+    position: relative;
+    display: grid;
+    margin:0 auto;
+    flex-direction: row;
+}
+.login-side{
+    padding: 1rem 2rem 0rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items:start;
+}
+.logo{
+    height: 3rem;
+    position:absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+}
+.my-form__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 28.75rem;
+    width: 100%;
+    padding: 0rem 1rem 2rem 1rem;
+    height: fit-content;
+    box-shadow: rgba(100,100,111,0.2) 0rem 6px 26px 0rem;
+}
+.login-welcome{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.login-welcome-row{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.login-wrapper{
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    margin: 0 auto;
+}
+.login-side{
+    padding: 11.75rem 2rem 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.my-form__button{
+    background: var(--primary);
+    color:white;
+    white-space: nowrap;
+    border: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    line-height: 3.125rem;
+    font-size: 1.125rem;
+    letter-spacing: .025rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 800;
+    min-height: 3.125rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 3s ease; -webkit-transition: all .3s ease;
+}
+.my-form__actions{
+    display: flex;
+    flex-direction: column;
+    color: var(--secondary);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+.my-form__actions a {
+    color:var(--secondary);
+    font-weight: 600;
+    text-decoration: none;
+}
+.my-form__actions a:hover {
+    text-decoration: underline;
+}
+.my-form__row{
+    display: flex;
+    justify-content: space-between;
+}
+.my-form__signup{
+    display: flex;
+    justify-content: center;
+}
+.my-form__signup a {
+    color: var(--primary);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 1.125rem;
+}
+.my-form__signup a:hover {
+    text-decoration: underline;
+}
+.text-field input{
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    max-width: 100%;
+    width: 100%;
+    border: 1px solid var(--secondary);
+    height: 3.125rem;
+    letter-spacing: .03rem;
+    background: transparent;
+    outline: none;
+    transition: .25s;
+    border-radius: 0.5rem;
+    text-indent: 1.5rem;
+    margin-top: 0.5rem;
+}
+.text-field {
+    position: relative;
+}
+.text-field img {
+    position: absolute;
+    right: -0.1125rem;
+    bottom: -0.25rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+}
+.text-field input:focus {
+    border: 0.0625rem solid var(--primary);
+}
+.text-field label {
+    color: var(--secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: .03rem;
+    z-index: 10;
+}
+@media(max-width: 640px){
+    .login-wrapper{
+        grid-template-columns: 1fr;
+        height: 100vh;
+    }
+    .info-side{
+        flex-direction: column-reverse;
+        padding: 3rem 3rem 3rem 2rem;
+    }
+}
+.login-wrapper fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
+    gap: 1rem;
+}
+.login-wrapper legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+.socials-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.socials-row img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.socials-row > a {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    min-height: 3rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text);
+    padding: 0.5rem;
+    border: 1px solid var(--primary-light);
+    font-weight: 700;
+}
+.socials-row > a:hover {
+    border: 1px solid var(--primary);
+}
+.socials-row > a img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.welcome-message {
+    max-width: 22.5rem;
+    text-align: left;
+}
+.info-side{
+    padding: 2rem 0.1rem 1rem 0.1rem;
+    color: #401B3D;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background: var(--background);
+    border-radius: 10px;
+    box-shadow: rgba(100,100,111,0.4) 0rem 6px 26px 0rem;
+}
+.info-side h2 {
+    margin-top: 1rem;
+    color: var(--text);
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    text-decoration: underline;    
+}
+.info-side p {
+    font-size: 1.2rem;
+}
+.info-side img {
+    max-width: 40.75rem;
+    max-height: 30rem;
+}
+.mockup {
+    border-radius: 10px;
+}

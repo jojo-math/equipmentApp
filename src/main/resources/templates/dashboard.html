@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="navbar">
+    <div class="user-info">
+        <span>ID: <span th:text="${utilisateur.id}"></span></span>
+        <span>Nom: <span th:text="${utilisateur.username}"></span></span>
+        <span>Email: <span th:text="${utilisateur.email}"></span></span>
+    </div>
+    <div class="nav-links">
+        <a th:href="@{/demandes}">Gestion des demandes</a>
+        <a th:href="@{/materiels}">Gestion des matériels</a>
+        <a th:href="@{/equipements}">Gestion des équipements</a>
+        <a th:if="${isAdmin}" th:href="@{/utilisateurs/gestion}">Gestion des utilisateurs</a>
+        <a th:if="${isAdmin}" th:href="@{/unites}">Gestion des unités</a>
+        <a th:href="@{/login}">Déconnexion</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Bienvenue, <span th:text="${utilisateur.username}"></span> !</h2>
+    <p>Utilisez la barre de navigation pour accéder aux différentes sections.</p>
+</div>
+</body>
+</html>

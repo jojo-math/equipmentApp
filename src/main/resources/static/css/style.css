@@ -1,0 +1,363 @@
+/* Réinitialisation de base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres */
+h2 {
+    color: #333;
+}
+
+/* Navigation (remplace les classes Bootstrap-like) */
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.user-info span {
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Boîte de dialogue (modal) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+select[multiple] {
+    height: 100px;
+    padding: 5px;
+}
+
+.filter-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Messages d'erreur */
+.error {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Styles pour login-form.html */
+.login-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.login-side {
+    padding: 11.75rem 2rem 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.logo {
+    height: 3rem;
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+}
+
+.my-form__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 28.75rem;
+    width: 100%;
+    padding: 0rem 1rem 2rem 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0rem 6px 26px 0rem;
+}
+
+.login-welcome-home {
+    text-align: center;
+}
+
+.login-welcome-home h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #1F2346;
+}
+
+.login-welcome-home p {
+    font-size: 1rem;
+    color: #1F2346;
+}
+
+.my-form {
+    width: 100%;
+}
+
+.my-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.my-form legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+.text-field {
+    position: relative;
+}
+
+.text-field input {
+    color: #1D1D1D;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid #1D1D1D;
+    height: 3.125rem;
+    text-indent: 1.5rem;
+    transition: border 0.25s;
+}
+
+.text-field input:focus {
+    border: 0.0625rem solid #497BF0;
+}
+
+.text-field label {
+    color: #1D1D1D;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.text-field img {
+    position: absolute;
+    right: -0.1125rem;
+    bottom: -0.25rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    transform: translate(-50%, -50%);
+}
+
+.my-form__button {
+    background: #497BF0;
+    color: white;
+    border: none;
+    line-height: 3.125rem;
+    font-size: 1.125rem;
+    font-weight: 800;
+    width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.my-form__button:hover {
+    background: #0056b3;
+}
+
+.info-side {
+    padding: 2rem 0.1rem 1rem 0.1rem;
+    color: #401B3D;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background: #bdafeecb;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.4) 0rem 6px 26px 0rem;
+}
+
+.info-side h2 {
+    margin-top: 1rem;
+    color: #1F2346;
+    font-size: 1.8rem;
+    text-decoration: underline;
+}
+
+.info-side p {
+    font-size: 1.2rem;
+    color: #1F2346;
+}
+
+.mockup {
+    max-width: 40.75rem;
+    max-height: 30rem;
+    border-radius: 10px;
+}
+
+.welcome-message {
+    max-width: 22.5rem;
+    text-align: left;
+}
+/* Styles pour la boîte de dialogue */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 5px;
+}
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Responsive design pour login-form */
+@media (max-width: 640px) {
+    .login-wrapper {
+        grid-template-columns: 1fr;
+        height: 100vh;
+    }
+    .info-side {
+        flex-direction: column-reverse;
+        padding: 3rem 3rem 3rem 2rem;
+    }
+}
+.suggestions {
+    position: absolute;
+    z-index: 1000;
+    width: calc(100% - 30px); /* Ajuster à la largeur du champ de texte */
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 2px;
+    display: none; /* Caché par défaut */
+}

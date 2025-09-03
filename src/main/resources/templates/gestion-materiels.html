@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des matériels</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.min.css}" />
+</head>
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <div th:if = "${currentUser.role=='ADMIN'}">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/utilisateurs/dashboardAdmin}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                                <span class="hide-menu">Tableau de bord </span>
+                            </a>
+                        </li>
+                    </div>
+                    <div th:if = "${currentUser.role=='USER'}">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/utilisateurs/dashboardUser}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                                <span class="hide-menu">Tableau de bord </span>
+                            </a>
+                        </li>
+                    </div>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/demandes}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-inbox"></i>
+                </span>
+                            <span class="hide-menu">Gestion des demandes</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/demandeurs}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                            <span class="hide-menu">Gestion des demandeurs</span>
+                        </a>
+                    </li>
+                    <div th:if = "${currentUser.role=='ADMIN'}">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/demandeurs}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                                <span class="hide-menu">Gestion des demandeurs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/materiels}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-box-seam"></i>
+                </span>
+                                <span class="hide-menu">Gestion des matériels</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/api/equipements}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-tools"></i>
+                </span>
+                                <span class="hide-menu">Gestion des équipements</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/utilisateurs/gestion}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                                <span class="hide-menu">Gestion des utilisateurs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/unites}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                <span class="hide-menu">Gestion des unités</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/salles}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                <span class="hide-menu">Gestion des salles</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/entreprises}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                <span class="hide-menu">Gestion des entreprises</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/categories}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                <span class="hide-menu">Gestion des catégories</span>
+                            </a>
+                        </li>
+                    </div>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">AUTH</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/logout}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-logout"></i>
+                </span>
+                            <span class="hide-menu">Deconnexion</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="body-wrapper">
+        <
+        <header class="app-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                            <i class="ti ti-bell-ringing"></i>
+                            <div class="notification bg-primary rounded-circle"></div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <img th:src="@{/assets/images/profile/user-1.jpg}" alt="" width="35" height="35" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                <div class="message-body">
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3">ID : <span th:text="${currentUser.id}"></span></p>
+                                    </a>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-mail fs-6"></i>
+                                        <p class="mb-0 fs-3">Utilisateur : <span th:text="${currentUser.username}"></span></p>
+                                    </a>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-list-check fs-6"></i>
+                                        <p class="mb-0 fs-3">Email : <span th:text="${currentUser.email}"></span></p>
+                                    </a>
+                                    <a th:href="@{/logout}" class="btn btn-outline-primary mx-3 mt-2 d-block">Deconnexion</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container-fluid">
+            <div th:if="${currentUser.role == 'ADMIN'}">
+                <div class="row">
+                    <h2>Gestion des matériels</h2>
+                    <div th:if="${error}" class="alert alert-danger">
+                        <span th:text="${error}"></span>
+                    </div>
+                    <div th:if="${success}" class="alert alert-success">
+                        <span th:text="${success}"></span>
+                    </div>
+                    <h3>Création</h3>
+                    <button class="btn btn-primary" onclick="openModal()">Créer un matériel</button>
+                    <h3>Modification</h3>
+                    <button class="btn btn-primary" onclick="openEditModal()">Modifier un matériel</button>
+                    <h3>Import/Export</h3>
+                    <div class="d-flex gap-3 mb-4">
+                        <form th:action="@{/materiels/export}" method="get">
+                            <button type="submit" class="btn btn-primary">Exporter la liste des matériels</button>
+                        </form>
+                        <form th:action="@{/materiels/import}" method="post" enctype="multipart/form-data">
+                            <div class="form-group d-flex align-items-center gap-2">
+                                <label for="file" class="mb-0">Importer un fichier Excel :</label>
+                                <input type="file" id="file" name="file" accept=".xlsx, .xls" required>
+                                <button type="submit" class="btn btn-primary">Importer</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Boîte de dialogue pour la création -->
+                    <div id="createMaterielModal" class="modal">
+                        <div class="modal-content bg-white">
+                            <span class="btn btn-primary close" onclick="closeModal()">X</span>
+                            <h3>Ajouter un matériel</h3>
+                            <form th:action="@{/materiels/save}" th:object="${materiel}" method="post">
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input type="text" th:field="*{nom}" required>
+                                    <div class="error" th:if="${#fields.hasErrors('nom')}">
+                                        <span th:errors="*{nom}"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantité</label>
+                                    <input type="number" th:field="${stock.qte}" min="1" required>
+                                    <!--                                <div class="error" th:if="${#fields.hasErrors('stock.qte')}">-->
+                                    <!--                                    <span th:errors="${stock.qte}"></span>-->
+                                    <!--                                </div>-->
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" th:field="*{description}" required>
+                                    <div class="error" th:if="${#fields.hasErrors('description')}">
+                                        <span th:errors="*{description}"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sélectionner la catégorie</label>
+                                    <select th:field="*{categorie}" required>
+                                        <option th:each="categorie : ${categories}"
+                                                th:value="${categorie.id}"
+                                                th:text="${categorie.nom}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unité</label>
+                                    <select th:field="*{unite}" required>
+                                        <option value=""></option>
+                                        <option th:each="unite : ${unites}"
+                                                th:value="${unite.id}"
+                                                th:text="${unite.nom}"></option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-gradient-success" type="submit">Sauvegarder</button>
+                                <button class="btn btn-gradient-danger" type="button" onclick="closeModal()">Annuler</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Boîte de dialogue pour la modification -->
+                    <div id="editMaterielModal" class="modal">
+                        <div class="modal-content bg-white">
+                            <span class="close" onclick="closeEditModal()">×</span>
+                            <h3>Modifier un matériel</h3>
+                            <form th:action="@{/materiels/update}" th:object="${materiel}" method="post">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <input type="text" name="id" th:value="${materiel.id}" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input type="text" th:field="*{nom}" required>
+                                    <div class="error" th:if="${#fields.hasErrors('nom')}">
+                                        <span th:errors="*{nom}"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" th:field="*{description}" required>
+                                    <div class="error" th:if="${#fields.hasErrors('description')}">
+                                        <span th:errors="*{description}"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sélectionner la catégorie</label>
+                                    <select th:field="*{categorie}" required>
+                                        <option value=""></option>
+                                        <option th:each="categorie : ${categories}"
+                                                th:value="${categorie.id}"
+                                                th:text="${categorie.nom}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unité</label>
+                                    <select th:field="*{unite}" required>
+                                        <option value=""></option>
+                                        <option th:each="unite : ${unites}"
+                                                th:value="${unite.id}"
+                                                th:text="${unite.nom}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Affecter un équipement</label>
+                                    <select th:field="*{equipement}">
+                                        <option value=""></option>
+                                        <option th:each="equipement : ${equipements}"
+                                                th:value="${equipement.id}"
+                                                th:text="${equipement.nom}"></option>
+                                    </select>
+                                </div>
+                                <button type="submit">Sauvegarder</button>
+                                <button type="button" onclick="closeEditModal()">Annuler</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Formulaire de filtres -->
+            <!-- Formulaire de filtres -->
+            <div class="row mb-4">
+                <div class="d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-semibold mb-4">Filtres de recherche</h5>
+                            <form th:action="@{/materiels}" method="get" class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="id" class="form-label">Num. série</label>
+                                    <input type="text" class="form-control" id="id" name="id" th:value="${filterId}" placeholder="Rechercher par ID">
+                                    <select id="id-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="nom" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" th:value="${filterNom}" placeholder="Rechercher par nom">
+                                    <select id="nom-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="categorieNom" class="form-label">Catégorie</label>
+                                    <input type="text" class="form-control" id="categorieNom" name="categorieNom" th:value="${filterCategorieNom}" placeholder="Rechercher par catégorie">
+                                    <select id="categorie-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description" th:value="${filterDescription}" placeholder="Rechercher par description">
+                                    <select id="description-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="uniteNom" class="form-label">Unité</label>
+                                    <input type="text" class="form-control" id="uniteNom" name="uniteNom" th:value="${filterUniteNom}" placeholder="Rechercher par unité">
+                                    <select id="unite-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="salleNom" class="form-label">Salle</label>
+                                    <input type="text" class="form-control" id="salleNom" name="salleNom" th:value="${filterSalleNom}" placeholder="Rechercher par salle">
+                                    <select id="salle-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="equipementNom" class="form-label">Équipement</label>
+                                    <input type="text" class="form-control" id="equipementNom" name="equipementNom" th:value="${filterEquipementNom}" placeholder="Rechercher par équipement">
+                                    <select id="equipement-suggestions" class="form-select suggestions" style="display: none;"></select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary me-2">Filtrer</button>
+                                    <a th:href="@{/materiels}" class="btn btn-secondary">Réinitialiser</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau des matériels -->
+            <div class="row">
+                <div class="d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-semibold mb-4">Tableau des matériels</h5>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 align-middle">
+                                    <thead class="text-dark fs-4">
+                                    <tr>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Num. série</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Nom<br>(Catégorie)</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Description</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">État</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Unité</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Salle</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Équipement</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Action</h6>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="materiel : ${materiels}">
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0" th:text="${materiel.id}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1" th:text="${materiel.nom}"></h6>
+                                            <span class="fw-normal" th:text="(${materiel.categorie != null ? materiel.categorie.nom : 'Aucune'})"></span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal" th:text="${materiel.description}"></p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div th:if="${materiel.etat == T(com.isifr.ManageEquipement.entities.EtatMateriel).DISPONIBLE}">
+                                                    <span class="badge bg-primary rounded-3 fw-semibold" th:text="${materiel.etat}"></span>
+                                                </div>
+                                                <div th:if="${materiel.etat == T(com.isifr.ManageEquipement.entities.EtatMateriel).INDISPONIBLE}">
+                                                    <span class="badge bg-danger rounded-3 fw-semibold" th:text="${materiel.etat}"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4" th:text="${materiel.unite != null ? materiel.unite.nom : 'Aucune'}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4" th:text="${materiel.salle != null ? materiel.salle.nom : 'Aucune'}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4" th:text="${materiel.equipement != null ? materiel.equipement.nom : 'Aucun'}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <form th:action="@{/materiels/delete}" th:object="${materiel}" method="post">
+                                                <input type="hidden" name="id" th:value="${materiel.id}" />
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer le matériel ?')">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Script pour gérer la boîte de dialogue
+    function openModal() {
+        document.getElementById("createMaterielModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("createMaterielModal").style.display = "none";
+    }
+
+    function openEditModal() {
+        document.getElementById("editMaterielModal").style.display = "block";
+    }
+
+    function closeEditModal() {
+        document.getElementById("editMaterielModal").style.display = "none";
+    }
+    $(document).ready(function() {
+        // Fonction générique pour configurer les suggestions
+        function setupSuggestions(inputId, suggestionUrl, selectId) {
+            // Écouter la saisie dans le champ de texte
+            $("#" + inputId).on("input", function() {
+                var term = $(this).val().trim();
+                var $select = $("#" + selectId);
+
+                // Vider le select et le cacher si le champ est vide
+                if (term.length === 0) {
+                    $select.empty().hide();
+                    return;
+                }
+
+                // Requête AJAX pour récupérer les suggestions
+                $.ajax({
+                    url: suggestionUrl,
+                    dataType: "json",
+                    data: {
+                        term: term
+                    },
+                    success: function(data) {
+                        $select.empty(); // Vider les options précédentes
+                        // Ajouter une option par défaut vide
+                        $select.append($("<option>").val("").text("Choisir une suggestion").prop("disabled", true).prop("selected", true));
+                        if (data.length > 0) {
+                            // Ajouter chaque suggestion comme une option
+                            $.each(data, function(index, value) {
+                                if (value) { // Vérifier que la valeur n'est pas nulle ou vide
+                                    $select.append($("<option>").val(value).text(value));
+                                }
+                            });
+                            $select.show(); // Afficher le select
+                        } else {
+                            $select.hide(); // Cacher si pas de suggestions
+                        }
+                    },
+                    error: function() {
+                        $select.empty().hide();
+                        console.log("Erreur lors de la récupération des suggestions pour " + inputId);
+                    }
+                });
+            });
+
+            // Remplir le champ de texte quand une option est sélectionnée
+            $("#" + selectId).on("change", function() {
+                var selectedValue = $(this).val();
+                if (selectedValue && selectedValue !== "") { // Vérifier que la valeur n'est pas vide
+                    $("#" + inputId).val(selectedValue);
+                    $(this).hide(); // Cacher le select après sélection
+                }
+            });
+
+            // Cacher le select si on clique ailleurs
+            $(document).on("click", function(e) {
+                if (!$(e.target).closest("#" + inputId).length && !$(e.target).closest("#" + selectId).length) {
+                    $select.hide();
+                }
+            });
+        }
+
+        // Configurer les suggestions pour chaque champ
+        setupSuggestions("id", "/api/materiels/id-suggestions", "id-suggestions");
+        setupSuggestions("nom", "/api/materiels/nom-suggestions", "nom-suggestions");
+        setupSuggestions("categorieNom", "/api/categories/suggestions", "categorie-suggestions");
+        setupSuggestions("description", "/api/materiels/description-suggestions", "description-suggestions");
+        setupSuggestions("uniteNom", "/api/unites/suggestions", "unite-suggestions");
+        setupSuggestions("salleNom", "/api/salles/suggestions", "salle-suggestions");
+        setupSuggestions("equipementNom", "/api/equipements/suggestions", "equipement-suggestions");
+    });
+</script>
+<script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/sidebarmenu.js}"></script>
+<script th:src="@{/assets/js/app.min.js}"></script>
+<script th:src="@{/assets/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<script th:src="@{/assets/libs/simplebar/dist/simplebar.js}"></script>
+<script th:src="@{/assets/js/dashboard.js}"></script>
+</body>
+</html>

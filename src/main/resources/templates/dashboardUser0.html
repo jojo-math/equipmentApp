@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord Utilisateur</title>
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.min.css}" />
+</head>
+<body>
+<div class="container-scroller">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div>
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-8"></i>
+                    </div>
+                </div>
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <div th:if = "${currentUser.role=='ADMIN'}">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/utilisateurs/dashboardAdmin}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                                    <span class="hide-menu">Tableau de bord </span>
+                                </a>
+                            </li>
+                        </div>
+                        <div th:if = "${currentUser.role=='USER'}">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/utilisateurs/dashboardUser}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                                    <span class="hide-menu">Tableau de bord </span>
+                                </a>
+                            </li>
+                        </div>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/demandes}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-inbox"></i>
+                </span>
+                                <span class="hide-menu">Gestion des demandes</span>
+                            </a>
+                        </li>
+                        <div th:if = "${currentUser.role=='ADMIN'}">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/demandeurs}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des demandeurs</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/materiels}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-box-seam"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des matériels</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/api/equipements}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-tools"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des équipements</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/utilisateurs/gestion}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des utilisateurs</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/unites}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des unités</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/salles}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des salles</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/entreprises}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des entreprises</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/categories}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building"></i>
+                </span>
+                                    <span class="hide-menu">Gestion des catégories</span>
+                                </a>
+                            </li>
+                        </div>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">AUTH</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/login}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-logout"></i>
+                </span>
+                                <span class="hide-menu">Deconnexion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <div class="body-wrapper">
+            <header class="app-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                                <i class="ti ti-bell-ringing"></i>
+                                <div class="notification bg-primary rounded-circle"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <img th:src="@{/assets/images/profile/user-1.jpg}" alt="" width="35" height="35" class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up bg-white" aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-user fs-6"></i>
+                                            <p class="mb-0 fs-3">ID : <span th:text="${currentUser.id}"></span></p>
+                                        </a>
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-mail fs-6"></i>
+                                            <p class="mb-0 fs-3">Utilisateur : <span th:text="${currentUser.username}"></span></p>
+                                        </a>
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-list-check fs-6"></i>
+                                            <p class="mb-0 fs-3">Email : <span th:text="${currentUser.email}"></span></p>
+                                        </a>
+                                        <a th:href="@{/logout}" class="btn btn-outline-primary mx-3 mt-2 d-block">Deconnexion</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!--End Header-->
+            <div class="container-fluid">
+                <!--  Row 1 -->
+                <div class="row">
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <div class="card bg-gradient-danger card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Matériels enregistrés <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                                </h4>
+                                <h2 class="mb-5" th:text="${materiels.size()}"></h2>
+                                <h6 class="card-text"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <div class="card bg-gradient-info card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Equipements enregistrés <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+                                </h4>
+                                <h2 class="mb-5" th:text="${equipements.size()}"></h2>
+                                <h6 class="card-text"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <div class="card bg-gradient-success card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Salles équipées<i class="mdi mdi-diamond mdi-24px float-end"></i>
+                                </h4>
+                                <h2 class="mb-5" th:text="${ndSallesEquip}"></h2>
+                                <h6 class="card-text"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <div class="card bg-gradient-secondary card-img-holder text-white">
+                            <div class="card-body">
+                                <h4 class="font-weight-normal mb-3">Nombre d'unités<i class="mdi mdi-diamond mdi-24px float-end"></i>
+                                </h4>
+                                <h2 class="mb-5" th:text="${unites.size()}"></h2>
+                                <h6 class="card-text"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Row 2 -->
+                <div class="row">
+                    <div class="col-lg-8 d-flex align-items-strech">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                                    <div class="mb-3 mb-sm-0">
+                                        <h5 class="card-title fw-semibold">Historique des demandes</h5>
+                                    </div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="1">March 2023</option>
+                                            <option value="2">April 2023</option>
+                                            <option value="3">May 2023</option>
+                                            <option value="4">June 2023</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <div class="mb-4">
+                                <h5 class="card-title fw-semibold">Afficher les recentes actions de l'utilisateur</h5>
+                            </div>
+                            <ul class="timeline-widget mb-0 position-relative mb-n5">
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe of $385.90</div>
+                                </li>
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
+                                            href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                                    </div>
+                                </li>
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment was made of $64.95 to Michael</div>
+                                </li>
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
+                                            href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                                    </div>
+                                </li>
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New arrival recorded
+                                    </div>
+                                </li>
+                                <li class="timeline-item d-flex position-relative overflow-hidden">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment Done</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-semibold mb-4">Tableau des salles equipees par cet utilisateur</h5>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 align-middle">
+                                    <thead class="text-dark fs-4">
+                                    <tr>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Id</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Assigned</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Name</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Priority</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Budget</h6>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
+                                            <span class="fw-normal">Web Designer</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Elite Admin</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
+                                            <span class="fw-normal">Project Manager</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Real Homes WP Theme</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
+                                            <span class="fw-normal">Project Manager</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-danger rounded-3 fw-semibold">High</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
+                                            <span class="fw-normal">Frontend Engineer</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Hosting Press HTML</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-semibold mb-4">Tableau des demandes</h5>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 align-middle">
+                                    <thead class="text-dark fs-4">
+                                    <tr>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Id</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Assigned</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Name</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Priority</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Budget</h6>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
+                                            <span class="fw-normal">Web Designer</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Elite Admin</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
+                                            <span class="fw-normal">Project Manager</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Real Homes WP Theme</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
+                                            <span class="fw-normal">Project Manager</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-danger rounded-3 fw-semibold">High</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
+                                            <span class="fw-normal">Frontend Engineer</span>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">Hosting Press HTML</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-6 px-6 text-center">
+                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/sidebarmenu.js}"></script>
+<script th:src="@{/assets/js/app.min.js}"></script>
+<script th:src="@{/assets/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<script th:src="@{/assets/libs/simplebar/dist/simplebar.js}"></script>
+<script th:src="@{/assets/js/dashboard.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+    <title>Connexion</title>
+</head>
+<body>
+<div class="login-wrapper">
+    <div class="login-side">
+        <a href="#" title="logo">
+            <img class="logo" th:src="@{/images/mcbtk0ub.svg}" alt="logo" aria-label="Retournez à la page d'accueil">
+        </a>
+        <div class="my-form__wrapper">
+            <div class="login-welcome-home">
+                <h1>Bon retour parmi nous</h1>
+                <p>Veuillez renseigner vos informations de connexion</p>
+            </div>
+            <div th:if="${param.error}" class="error">
+                Identifiants incorrects
+            </div>
+            <form class="my-form" aria-labelledby="login-title" th:action="@{/login}" method="post">
+                <fieldset>
+                    <legend id="login-title">Formulaire de connexion</legend>
+                    <div class="text-field">
+                        <label>Nom d'utilisateur</label>
+                        <input type="text" name="username" required>
+                        <img th:src="@{/images/WindowsHelloFaceToastIcon.png}" alt="Email Icon" title="Email Icon">
+                    </div>
+                    <div class="text-field">
+                        <label>Mot de passe</label>
+                        <input type="password" name="password" required>
+                        <img th:src="@{/images/privacy-icon.png}" alt="Password Icon" title="Pwd Icon">
+                    </div>
+                    <button type="submit" class="my-form__button" aria-label="Submit login form">
+                        Se connecter
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="info-side">
+        <img th:src="@{/images/school-741165_1280.jpg}" class="mockup" aria-hidden="true">
+        <div class="welcome-message">
+            <h2>Gestion des équipements</h2>
+            <p>Découvrez nos fonctionnalités sur la gestion d'équipements en entreprise</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
